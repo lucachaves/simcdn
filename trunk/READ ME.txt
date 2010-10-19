@@ -1,0 +1,31 @@
+Omnet++ 4.1
+inet-20100723 (com a alteração do TCP e UDP)
+
+(public)
+TCP.h
+
+    //HACK
+    double ephemeralPortsUsage();
+
+TCP.cc
+
+        //HACKS
+        double TCP::ephemeralPortsUsage() {
+	        return (double) usedEphemeralPorts.size() / (double) EPHEMERAL_PORTRANGE_END-EPHEMERAL_PORTRANGE_START;
+        }
+
+UDP.h
+
+    //HACK
+    double ephemeralPortsUsage();
+
+UDP.cc
+
+        //HACK
+        double UDP::ephemeralPortsUsage() {
+	        double usage = (double)lastEphemeralPort - EPHEMERAL_PORTRANGE_START;
+	        double total = EPHEMERAL_PORTRANGE_END - EPHEMERAL_PORTRANGE_START;
+	        return usage / total;
+        }
+
+
