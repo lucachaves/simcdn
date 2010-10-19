@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for CDNRef
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -O out -I../inet/src/networklayer/rsvp_te -I../inet/src/networklayer/common -I../inet/src/networklayer/icmpv6 -I../inet/src/transport/tcp -I../inet/src/networklayer/mpls -I../inet/src/networklayer/ted -I../inet/src/networklayer/contract -I../inet/src/util -I../inet/src/transport/contract -I../inet/src/linklayer/mfcore -I../inet/src/networklayer/ldp -I../inet/src/networklayer/ipv4 -I../inet/src/base -I../inet/src/util/headerserializers -I../inet/src/networklayer/ipv6 -I../inet/src/transport/sctp -I../inet/src/world -I../inet/src/applications/pingapp -I../inet/src/linklayer/contract -I../inet/src/networklayer/arp -I../inet/src/transport/udp -L../inet/out/$(CONFIGNAME)/src -linet -KINET_PROJ=../inet
+#  opp_makemake -f --deep -O out -I../inet/src/networklayer/common -I../inet/src/networklayer/rsvp_te -I../inet/src/networklayer/icmpv6 -I../inet/src/transport/tcp -I../inet/src/networklayer/mpls -I../inet/src/networklayer/ted -I../inet/src/networklayer/contract -I../inet/src/util -I../inet/src/transport/contract -I../inet/src/linklayer/mfcore -I../inet/src/networklayer/ldp -I../inet/src/networklayer/ipv4 -I../inet/src/base -I../inet/src/util/headerserializers -I../inet/src/networklayer/ipv6 -I../inet/src/transport/sctp -I../inet/src/world -I../inet/src/applications/pingapp -I../inet/src/linklayer/contract -I../inet/src/networklayer/arp -I../inet/src/transport/udp -L../inet/out/$(CONFIGNAME)/src -linet -KINET_PROJ=../inet
 #
 
 # Name of target to be created (-o option)
@@ -15,8 +15,8 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
 
 # C++ include paths (with -I)
 INCLUDE_PATH = \
-    -I../inet/src/networklayer/rsvp_te \
     -I../inet/src/networklayer/common \
+    -I../inet/src/networklayer/rsvp_te \
     -I../inet/src/networklayer/icmpv6 \
     -I../inet/src/transport/tcp \
     -I../inet/src/networklayer/mpls \
@@ -93,7 +93,21 @@ INCLUDE_PATH = \
     -Imodels/teste/caches \
     -Imodels/teste/dataset \
     -Imodels/teste/results \
-    -Imodels/teste/stats
+    -Imodels/teste/stats \
+    -Isrc \
+    -Isrc/cache \
+    -Isrc/coordinate \
+    -Isrc/coordinate/command \
+    -Isrc/coordinate/stats \
+    -Isrc/execption \
+    -Isrc/genericNode \
+    -Isrc/genericNode/contentExchange \
+    -Isrc/genericNode/contentExchange/static \
+    -Isrc/genericNode/contentExchange/static/command \
+    -Isrc/genericNode/contentExchange/static/handler \
+    -Isrc/genericNode/contentExchange/static/message \
+    -Isrc/genericNode/contentExchange/static/state \
+    -Isrc/message
 
 # Additional object and library files to link with
 EXTRA_OBJS =
@@ -109,59 +123,59 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
 OBJS = \
-    $O/cache/Cache.o \
-    $O/cache/LfuCache.o \
-    $O/cache/MruCache.o \
-    $O/cache/LruCache.o \
-    $O/cache/InformationSet.o \
-    $O/coordinate/CDN_RequestsAssignerReceiver.o \
-    $O/coordinate/CDN_CentralUnit.o \
-    $O/coordinate/CentralUnit.o \
-    $O/coordinate/CDN_CentralUnit_Reply.o \
-    $O/coordinate/command/Commands.o \
-    $O/coordinate/command/CDN_Commands.o \
-    $O/coordinate/stats/statistic.o \
-    $O/coordinate/stats/CacheLogEntry.o \
-    $O/coordinate/stats/RequestLogEntry.o \
-    $O/coordinate/stats/Stats.o \
-    $O/genericNode/PortNumberAllocator.o \
-    $O/genericNode/contentExchange/Negotiator.o \
-    $O/genericNode/contentExchange/AlternateServerDetector.o \
-    $O/genericNode/contentExchange/ServerUnit.o \
-    $O/genericNode/contentExchange/ServicePeer.o \
-    $O/genericNode/contentExchange/ClientUnit.o \
-    $O/genericNode/contentExchange/RequestsAssignerReceiver.o \
-    $O/genericNode/contentExchange/StateTester.o \
-    $O/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.o \
-    $O/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.o \
-    $O/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.o \
-    $O/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.o \
-    $O/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.o \
-    $O/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.o \
-    $O/genericNode/contentExchange/static/StaticContentExchange_StateTester.o \
-    $O/genericNode/contentExchange/static/command/Command.o \
-    $O/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.o \
-    $O/genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.o \
-    $O/genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.o \
-    $O/genericNode/contentExchange/static/handler/DownloadersBase.o \
-    $O/genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.o \
-    $O/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.o \
-    $O/genericNode/contentExchange/static/handler/Handler.o \
-    $O/genericNode/contentExchange/static/message/StaticObject.o \
-    $O/genericNode/contentExchange/static/message/ServableItem.o \
-    $O/genericNode/contentExchange/static/message/StaticObjectMessage.o \
-    $O/genericNode/contentExchange/static/state/StaticContentExchange_State.o \
-    $O/genericNode/contentExchange/static/state/State.o \
-    $O/message/RequestMessage.o \
-    $O/message/Request.o \
-    $O/message/InterNodeRequestProtocol.o \
-    $O/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.o \
-    $O/message/RequestMessage_Base_m.o
+    $O/src/cache/Cache.o \
+    $O/src/cache/LfuCache.o \
+    $O/src/cache/MruCache.o \
+    $O/src/cache/LruCache.o \
+    $O/src/cache/InformationSet.o \
+    $O/src/coordinate/CDN_RequestsAssignerReceiver.o \
+    $O/src/coordinate/CDN_CentralUnit.o \
+    $O/src/coordinate/CentralUnit.o \
+    $O/src/coordinate/CDN_CentralUnit_Reply.o \
+    $O/src/coordinate/command/Commands.o \
+    $O/src/coordinate/command/CDN_Commands.o \
+    $O/src/coordinate/stats/statistic.o \
+    $O/src/coordinate/stats/CacheLogEntry.o \
+    $O/src/coordinate/stats/RequestLogEntry.o \
+    $O/src/coordinate/stats/Stats.o \
+    $O/src/genericNode/PortNumberAllocator.o \
+    $O/src/genericNode/contentExchange/Negotiator.o \
+    $O/src/genericNode/contentExchange/AlternateServerDetector.o \
+    $O/src/genericNode/contentExchange/ServerUnit.o \
+    $O/src/genericNode/contentExchange/ServicePeer.o \
+    $O/src/genericNode/contentExchange/ClientUnit.o \
+    $O/src/genericNode/contentExchange/RequestsAssignerReceiver.o \
+    $O/src/genericNode/contentExchange/StateTester.o \
+    $O/src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.o \
+    $O/src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.o \
+    $O/src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.o \
+    $O/src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.o \
+    $O/src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.o \
+    $O/src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.o \
+    $O/src/genericNode/contentExchange/static/StaticContentExchange_StateTester.o \
+    $O/src/genericNode/contentExchange/static/command/Command.o \
+    $O/src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.o \
+    $O/src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.o \
+    $O/src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.o \
+    $O/src/genericNode/contentExchange/static/handler/DownloadersBase.o \
+    $O/src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.o \
+    $O/src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.o \
+    $O/src/genericNode/contentExchange/static/handler/Handler.o \
+    $O/src/genericNode/contentExchange/static/message/StaticObject.o \
+    $O/src/genericNode/contentExchange/static/message/ServableItem.o \
+    $O/src/genericNode/contentExchange/static/message/StaticObjectMessage.o \
+    $O/src/genericNode/contentExchange/static/state/StaticContentExchange_State.o \
+    $O/src/genericNode/contentExchange/static/state/State.o \
+    $O/src/message/RequestMessage.o \
+    $O/src/message/Request.o \
+    $O/src/message/InterNodeRequestProtocol.o \
+    $O/src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.o \
+    $O/src/message/RequestMessage_Base_m.o
 
 # Message files
 MSGFILES = \
-    genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg \
-    message/RequestMessage_Base.msg
+    src/genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg \
+    src/message/RequestMessage_Base.msg
 
 # Other makefile variables (-K)
 INET_PROJ=../inet
@@ -283,856 +297,870 @@ clean:
 	-rm -f models/teste/dataset/*_m.cc models/teste/dataset/*_m.h
 	-rm -f models/teste/results/*_m.cc models/teste/results/*_m.h
 	-rm -f models/teste/stats/*_m.cc models/teste/stats/*_m.h
+	-rm -f src/*_m.cc src/*_m.h
+	-rm -f src/cache/*_m.cc src/cache/*_m.h
+	-rm -f src/coordinate/*_m.cc src/coordinate/*_m.h
+	-rm -f src/coordinate/command/*_m.cc src/coordinate/command/*_m.h
+	-rm -f src/coordinate/stats/*_m.cc src/coordinate/stats/*_m.h
+	-rm -f src/execption/*_m.cc src/execption/*_m.h
+	-rm -f src/genericNode/*_m.cc src/genericNode/*_m.h
+	-rm -f src/genericNode/contentExchange/*_m.cc src/genericNode/contentExchange/*_m.h
+	-rm -f src/genericNode/contentExchange/static/*_m.cc src/genericNode/contentExchange/static/*_m.h
+	-rm -f src/genericNode/contentExchange/static/command/*_m.cc src/genericNode/contentExchange/static/command/*_m.h
+	-rm -f src/genericNode/contentExchange/static/handler/*_m.cc src/genericNode/contentExchange/static/handler/*_m.h
+	-rm -f src/genericNode/contentExchange/static/message/*_m.cc src/genericNode/contentExchange/static/message/*_m.h
+	-rm -f src/genericNode/contentExchange/static/state/*_m.cc src/genericNode/contentExchange/static/state/*_m.h
+	-rm -f src/message/*_m.cc src/message/*_m.h
 
 cleanall: clean
 	-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
-	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc cache/*.cc coordinate/*.cc coordinate/command/*.cc coordinate/stats/*.cc execption/*.cc genericNode/*.cc genericNode/contentExchange/*.cc genericNode/contentExchange/static/*.cc genericNode/contentExchange/static/command/*.cc genericNode/contentExchange/static/handler/*.cc genericNode/contentExchange/static/message/*.cc genericNode/contentExchange/static/state/*.cc message/*.cc models/*.cc models/RNP/*.cc models/RNP/caches/*.cc models/RNP/dataset/*.cc models/RNP/results/*.cc models/RNP/stats/*.cc models/RNP_LAYOUT_1/*.cc models/RNP_LAYOUT_2/*.cc models/_batch/*.cc models/_stats/*.cc models/exp01/*.cc models/exp01/caches/*.cc models/exp01/dataset/*.cc models/exp01/results/*.cc models/exp01/stats/*.cc models/exp02/*.cc models/exp02/caches/*.cc models/exp02/dataset/*.cc models/exp02/stats/*.cc models/exp11/*.cc models/exp11/caches/*.cc models/exp11/dataset/*.cc models/exp11/results/*.cc models/exp11/stats/*.cc models/exp12/*.cc models/exp12/caches/*.cc models/exp12/dataset/*.cc models/exp12/results/*.cc models/exp12/stats/*.cc models/nHost/*.cc models/nHost/caches/*.cc models/nHost/dataset/*.cc models/nHost/results/*.cc models/nHost/stats/*.cc models/simpleCDN/*.cc models/simpleCDN/caches/*.cc models/simpleCDN/dataset/*.cc models/simpleCDN/results/*.cc models/simpleCDN/stats/*.cc models/teste/*.cc models/teste/caches/*.cc models/teste/dataset/*.cc models/teste/results/*.cc models/teste/stats/*.cc
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc cache/*.cc coordinate/*.cc coordinate/command/*.cc coordinate/stats/*.cc execption/*.cc genericNode/*.cc genericNode/contentExchange/*.cc genericNode/contentExchange/static/*.cc genericNode/contentExchange/static/command/*.cc genericNode/contentExchange/static/handler/*.cc genericNode/contentExchange/static/message/*.cc genericNode/contentExchange/static/state/*.cc message/*.cc models/*.cc models/RNP/*.cc models/RNP/caches/*.cc models/RNP/dataset/*.cc models/RNP/results/*.cc models/RNP/stats/*.cc models/RNP_LAYOUT_1/*.cc models/RNP_LAYOUT_2/*.cc models/_batch/*.cc models/_stats/*.cc models/exp01/*.cc models/exp01/caches/*.cc models/exp01/dataset/*.cc models/exp01/results/*.cc models/exp01/stats/*.cc models/exp02/*.cc models/exp02/caches/*.cc models/exp02/dataset/*.cc models/exp02/stats/*.cc models/exp11/*.cc models/exp11/caches/*.cc models/exp11/dataset/*.cc models/exp11/results/*.cc models/exp11/stats/*.cc models/exp12/*.cc models/exp12/caches/*.cc models/exp12/dataset/*.cc models/exp12/results/*.cc models/exp12/stats/*.cc models/nHost/*.cc models/nHost/caches/*.cc models/nHost/dataset/*.cc models/nHost/results/*.cc models/nHost/stats/*.cc models/simpleCDN/*.cc models/simpleCDN/caches/*.cc models/simpleCDN/dataset/*.cc models/simpleCDN/results/*.cc models/simpleCDN/stats/*.cc models/teste/*.cc models/teste/caches/*.cc models/teste/dataset/*.cc models/teste/results/*.cc models/teste/stats/*.cc src/*.cc src/cache/*.cc src/coordinate/*.cc src/coordinate/command/*.cc src/coordinate/stats/*.cc src/execption/*.cc src/genericNode/*.cc src/genericNode/contentExchange/*.cc src/genericNode/contentExchange/static/*.cc src/genericNode/contentExchange/static/command/*.cc src/genericNode/contentExchange/static/handler/*.cc src/genericNode/contentExchange/static/message/*.cc src/genericNode/contentExchange/static/state/*.cc src/message/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/cache/LfuCache.o: cache/LfuCache.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	cache/Cache.h \
-	cache/AnakreonCommon.h \
-	cache/InformationSet.h \
-	cache/LfuCache.h \
-	execption/Exceptions.h
-$O/cache/InformationSet.o: cache/InformationSet.cc \
-	cache/InformationSet.h
-$O/cache/MruCache.o: cache/MruCache.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	cache/MruCache.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	cache/Cache.h \
-	cache/AnakreonCommon.h \
-	cache/InformationSet.h \
-	execption/Exceptions.h
-$O/cache/LruCache.o: cache/LruCache.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	cache/Cache.h \
-	cache/AnakreonCommon.h \
-	cache/InformationSet.h \
-	execption/Exceptions.h \
-	cache/LruCache.h
-$O/cache/Cache.o: cache/Cache.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	cache/Cache.h \
-	cache/InformationSet.h
-$O/coordinate/CDN_CentralUnit_Reply.o: coordinate/CDN_CentralUnit_Reply.cc \
-	coordinate/CDN_CentralUnit_Reply.h \
-	genericNode/contentExchange/static/message/ServableItem.h
-$O/coordinate/CDN_RequestsAssignerReceiver.o: coordinate/CDN_RequestsAssignerReceiver.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
+$O/src/cache/InformationSet.o: src/cache/InformationSet.cc \
+	src/cache/InformationSet.h
+$O/src/cache/MruCache.o: src/cache/MruCache.cc \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/cache/MruCache.h \
+	src/execption/Exceptions.h \
+	src/cache/AnakreonCommon.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/cache/InformationSet.h
+$O/src/cache/LfuCache.o: src/cache/LfuCache.cc \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/cache/LfuCache.h \
+	src/execption/Exceptions.h \
+	src/cache/AnakreonCommon.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/cache/InformationSet.h
+$O/src/cache/LruCache.o: src/cache/LruCache.cc \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/cache/LruCache.h \
+	src/execption/Exceptions.h \
+	src/cache/AnakreonCommon.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/cache/InformationSet.h
+$O/src/cache/Cache.o: src/cache/Cache.cc \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/cache/Cache.h \
+	src/cache/InformationSet.h
+$O/src/coordinate/CentralUnit.o: src/coordinate/CentralUnit.cc \
+	src/coordinate/CentralUnit.h
+$O/src/coordinate/CDN_RequestsAssignerReceiver.o: src/coordinate/CDN_RequestsAssignerReceiver.cc \
 	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	message/RequestMessage.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/coordinate/stats/LogEntry.h \
 	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ClientUnit.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/stats/Stats.h \
-	message/InterNodeRequestProtocol.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ClientUnit.h \
-	coordinate/command/Commands.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/ServicePeer.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	coordinate/stats/LogEntry.h \
+	src/coordinate/command/Commands.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/cache/InformationSet.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/execption/Exceptions.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	$(INET_PROJ)/src/transport/udp/UDP.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/coordinate/command/CDN_Commands.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/coordinate/CDN_CentralUnit.o: src/coordinate/CDN_CentralUnit.cc \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/coordinate/CDN_CentralUnit_Reply.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/coordinate/stats/LogEntry.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/command/Commands.h \
+	src/cache/Cache.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/execption/Exceptions.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	$(INET_PROJ)/src/transport/udp/UDP.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/command/CDN_Commands.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/coordinate/CDN_CentralUnit_Reply.o: src/coordinate/CDN_CentralUnit_Reply.cc \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/coordinate/CDN_CentralUnit_Reply.h
+$O/src/coordinate/command/CDN_Commands.o: src/coordinate/command/CDN_Commands.cc \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/cache/AnakreonCommon.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/execption/Exceptions.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/command/CDN_Commands.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/command/Commands.h
+$O/src/coordinate/command/Commands.o: src/coordinate/command/Commands.cc \
+	src/coordinate/command/Commands.h
+$O/src/coordinate/stats/Stats.o: src/coordinate/stats/Stats.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/coordinate/stats/Stats.h
+$O/src/coordinate/stats/statistic.o: src/coordinate/stats/statistic.cc \
+	src/coordinate/stats/statistic.h
+$O/src/coordinate/stats/RequestLogEntry.o: src/coordinate/stats/RequestLogEntry.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/coordinate/stats/RequestLogEntry.h
+$O/src/coordinate/stats/CacheLogEntry.o: src/coordinate/stats/CacheLogEntry.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/coordinate/stats/CacheLogEntry.h
+$O/src/genericNode/PortNumberAllocator.o: src/genericNode/PortNumberAllocator.cc \
+	src/execption/Exceptions.h
+$O/src/genericNode/contentExchange/ServerUnit.o: src/genericNode/contentExchange/ServerUnit.cc \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/AlternateServerDetector.o: src/genericNode/contentExchange/AlternateServerDetector.cc \
+	src/genericNode/contentExchange/AlternateServerDetector.h
+$O/src/genericNode/contentExchange/ServicePeer.o: src/genericNode/contentExchange/ServicePeer.cc \
+	src/genericNode/contentExchange/ServicePeer.h
+$O/src/genericNode/contentExchange/ClientUnit.o: src/genericNode/contentExchange/ClientUnit.cc \
+	src/genericNode/contentExchange/ClientUnit.h
+$O/src/genericNode/contentExchange/Negotiator.o: src/genericNode/contentExchange/Negotiator.cc \
+	src/genericNode/contentExchange/Negotiator.h
+$O/src/genericNode/contentExchange/RequestsAssignerReceiver.o: src/genericNode/contentExchange/RequestsAssignerReceiver.cc \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h
+$O/src/genericNode/contentExchange/StateTester.o: src/genericNode/contentExchange/StateTester.cc \
+	src/genericNode/contentExchange/StateTester.h
+$O/src/genericNode/contentExchange/static/StaticContentExchange_StateTester.o: src/genericNode/contentExchange/static/StaticContentExchange_StateTester.cc \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/coordinate/command/Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	$(INET_PROJ)/src/transport/udp/UDP.h \
+	src/coordinate/command/CDN_Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.o: src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.cc \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/coordinate/command/Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/cache/InformationSet.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/execption/Exceptions.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	$(INET_PROJ)/src/transport/udp/UDP.h \
+	src/coordinate/command/CDN_Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.o: src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.cc \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/coordinate/CDN_CentralUnit_Reply.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/coordinate/command/Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/cache/InformationSet.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/coordinate/stats/Stats.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	$(INET_PROJ)/src/transport/udp/UDP.h \
+	src/coordinate/command/CDN_Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.o: src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.cc \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/coordinate/stats/LogEntry.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/coordinate/command/Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/execption/Exceptions.h \
+	$(INET_PROJ)/src/transport/udp/UDP.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	src/coordinate/command/CDN_Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.o: src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.cc \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/coordinate/CDN_CentralUnit_Reply.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/coordinate/stats/LogEntry.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/coordinate/command/Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/cache/Cache.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/InformationSet.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	src/coordinate/command/CDN_Commands.h \
+	src/genericNode/contentExchange/static/state/State.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/coordinate/CDN_CentralUnit.o: coordinate/CDN_CentralUnit.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.o: src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.cc \
 	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	message/RequestMessage.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	coordinate/CDN_CentralUnit_Reply.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
 	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/coordinate/command/Commands.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/stats/Stats.h \
-	message/InterNodeRequestProtocol.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ClientUnit.h \
-	coordinate/command/Commands.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/ServicePeer.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/coordinate/stats/Stats.h \
+	src/cache/InformationSet.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	coordinate/stats/LogEntry.h \
+	src/genericNode/contentExchange/Negotiator.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
+	src/coordinate/command/CDN_Commands.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/coordinate/CentralUnit.o: coordinate/CentralUnit.cc \
-	coordinate/CentralUnit.h
-$O/coordinate/command/Commands.o: coordinate/command/Commands.cc \
-	coordinate/command/Commands.h
-$O/coordinate/command/CDN_Commands.o: coordinate/command/CDN_Commands.cc \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/static/command/Command.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	cache/AnakreonCommon.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	message/Request.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h
-$O/coordinate/stats/CacheLogEntry.o: coordinate/stats/CacheLogEntry.cc \
-	coordinate/stats/CacheLogEntry.h \
-	coordinate/stats/LogEntry.h
-$O/coordinate/stats/Stats.o: coordinate/stats/Stats.cc \
-	coordinate/stats/CacheLogEntry.h \
-	coordinate/stats/LogEntry.h \
-	coordinate/stats/Stats.h \
-	coordinate/stats/RequestLogEntry.h
-$O/coordinate/stats/statistic.o: coordinate/stats/statistic.cc \
-	coordinate/stats/statistic.h
-$O/coordinate/stats/RequestLogEntry.o: coordinate/stats/RequestLogEntry.cc \
-	coordinate/stats/LogEntry.h \
-	coordinate/stats/RequestLogEntry.h
-$O/genericNode/PortNumberAllocator.o: genericNode/PortNumberAllocator.cc \
-	execption/Exceptions.h
-$O/genericNode/contentExchange/Negotiator.o: genericNode/contentExchange/Negotiator.cc \
-	genericNode/contentExchange/Negotiator.h
-$O/genericNode/contentExchange/ServerUnit.o: genericNode/contentExchange/ServerUnit.cc \
-	genericNode/contentExchange/ServerUnit.h
-$O/genericNode/contentExchange/StateTester.o: genericNode/contentExchange/StateTester.cc \
-	genericNode/contentExchange/StateTester.h
-$O/genericNode/contentExchange/ClientUnit.o: genericNode/contentExchange/ClientUnit.cc \
-	genericNode/contentExchange/ClientUnit.h
-$O/genericNode/contentExchange/ServicePeer.o: genericNode/contentExchange/ServicePeer.cc \
-	genericNode/contentExchange/ServicePeer.h
-$O/genericNode/contentExchange/RequestsAssignerReceiver.o: genericNode/contentExchange/RequestsAssignerReceiver.cc \
-	genericNode/contentExchange/RequestsAssignerReceiver.h
-$O/genericNode/contentExchange/AlternateServerDetector.o: genericNode/contentExchange/AlternateServerDetector.cc \
-	genericNode/contentExchange/AlternateServerDetector.h
-$O/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.o: genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.o: src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.cc \
 	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	message/RequestMessage.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	coordinate/CDN_CentralUnit_Reply.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/coordinate/stats/LogEntry.h \
 	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
+	src/cache/MruCache.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/coordinate/command/Commands.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	message/InterNodeRequestProtocol.h \
-	coordinate/stats/Stats.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ClientUnit.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/ServicePeer.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/cache/InformationSet.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	coordinate/stats/LogEntry.h \
+	src/cache/LfuCache.h \
+	src/cache/LruCache.h \
+	src/genericNode/contentExchange/Negotiator.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
+	src/coordinate/command/CDN_Commands.h \
+	src/genericNode/contentExchange/static/state/State.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/genericNode/contentExchange/static/StaticContentExchange_StateTester.o: genericNode/contentExchange/static/StaticContentExchange_StateTester.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	message/RequestMessage.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/Stats.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	genericNode/contentExchange/ClientUnit.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
-	coordinate/stats/LogEntry.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.o: src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	$(INET_PROJ)/src/transport/udp/UDP.h \
-	cache/Cache.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.o: genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	message/RequestMessage.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/stats/RequestLogEntry.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/stats/Stats.h \
-	message/InterNodeRequestProtocol.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/command/Commands.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	genericNode/contentExchange/ClientUnit.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.o: genericNode/contentExchange/static/StaticContentExchange_ServerUnit.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	cache/InformationSet.h \
-	message/RequestMessage.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	message/InterNodeRequestProtocol.h \
-	coordinate/stats/Stats.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/ClientUnit.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/ServicePeer.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.o: genericNode/contentExchange/static/StaticContentExchange_ServicePeer.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	cache/InformationSet.h \
-	message/RequestMessage.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	cache/LfuCache.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/stats/Stats.h \
-	message/InterNodeRequestProtocol.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/command/Commands.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	genericNode/contentExchange/ClientUnit.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	cache/MruCache.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
-	cache/LruCache.h
-$O/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.o: genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	message/RequestMessage.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/CacheLogEntry.h \
-	message/InterNodeRequestProtocol.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/stats/Stats.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/ClientUnit.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/ServicePeer.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.o: genericNode/contentExchange/static/StaticContentExchange_ClientUnit.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	message/RequestMessage.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	coordinate/CDN_CentralUnit_Reply.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/Stats.h \
-	message/InterNodeRequestProtocol.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CentralUnit.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/ClientUnit.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/transport/udp/UDP.h \
-	cache/Cache.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/genericNode/contentExchange/static/command/Command.o: genericNode/contentExchange/static/command/Command.cc \
-	genericNode/contentExchange/static/command/Command.h
-$O/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.o: genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.cc \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	message/Request.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h
-$O/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.o: genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	genericNode/contentExchange/static/command/Command.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	cache/InformationSet.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/static/handler/DownloadersBase.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/stats/Stats.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	genericNode/contentExchange/ClientUnit.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	src/genericNode/contentExchange/static/command/Command.h
+$O/src/genericNode/contentExchange/static/command/Command.o: src/genericNode/contentExchange/static/command/Command.cc \
+	src/genericNode/contentExchange/static/command/Command.h
+$O/src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.o: src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.cc \
+	src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
+	src/coordinate/command/Commands.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
 	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	genericNode/contentExchange/ServerUnit.h \
-	coordinate/command/CDN_Commands.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
+	src/cache/LruCache.h \
+	src/genericNode/contentExchange/Negotiator.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	cache/Cache.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ServerUnit.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	genericNode/contentExchange/static/state/State.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h
-$O/genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.o: genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.cc \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	cache/InformationSet.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/Stats.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/ClientUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/CDN_CentralUnit.h \
+	src/genericNode/contentExchange/static/handler/DownloadersBase.h \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/execption/Exceptions.h \
+	src/coordinate/command/CDN_Commands.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h
+$O/src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.o: src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.cc \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage.h \
+	src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPClientHandler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/coordinate/command/Commands.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
 	$(INET_PROJ)/src/transport/contract/UDPSocket.h \
-	coordinate/stats/LogEntry.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	cache/Cache.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
-	genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ServerUnit.h \
 	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	message/RequestMessage.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
 	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/StateTester.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ClientUnit.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	message/InterNodeRequestProtocol.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/ServerUnit.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
+	src/execption/Exceptions.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h
-$O/genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.o: genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.cc \
-	genericNode/contentExchange/static/handler/StaticContentExchange_TCPServerHandler.h \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	cache/InformationSet.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/Stats.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/ClientUnit.h \
-	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	coordinate/stats/LogEntry.h \
-	$(INET_PROJ)/src/transport/udp/UDP.h \
-	cache/Cache.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
-	cache/LruCache.h \
-	genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/coordinate/command/CDN_Commands.h
+$O/src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.o: src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.cc \
+	src/genericNode/contentExchange/static/handler/DownloadersBase.h \
 	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	message/RequestMessage.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
+	src/coordinate/stats/LogEntry.h \
 	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/StateTester.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
+	src/coordinate/command/Commands.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/static/handler/DownloadersBase.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	message/InterNodeRequestProtocol.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
-	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h
-$O/genericNode/contentExchange/static/handler/DownloadersBase.o: genericNode/contentExchange/static/handler/DownloadersBase.cc \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	cache/InformationSet.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/Stats.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/ClientUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	coordinate/CDN_CentralUnit.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/cache/Cache.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
 	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
-	coordinate/stats/LogEntry.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/genericNode/contentExchange/Negotiator.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	cache/Cache.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	genericNode/contentExchange/static/command/Command.h \
-	$(INET_PROJ)/src/base/INETDefs.h \
-	message/RequestMessage.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
-	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
-	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
-	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/static/handler/DownloadersBase.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/ServerUnit.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
-	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
+	src/coordinate/command/CDN_Commands.h \
+	src/coordinate/stats/RequestLogEntry.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h
-$O/genericNode/contentExchange/static/handler/Handler.o: genericNode/contentExchange/static/handler/Handler.cc \
-	message/Request.h \
-	coordinate/stats/LogEntry.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	coordinate/stats/RequestLogEntry.h
-$O/genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.o: genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.cc \
-	message/RequestMessage_Base_m.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	genericNode/contentExchange/Negotiator.h \
-	cache/InformationSet.h \
-	coordinate/CDN_RequestsAssignerReceiver.h \
-	coordinate/stats/CacheLogEntry.h \
-	genericNode/contentExchange/StateTester.h \
-	coordinate/stats/Stats.h \
-	coordinate/CentralUnit.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
-	coordinate/CDN_CentralUnit.h \
-	genericNode/contentExchange/AlternateServerDetector.h \
-	genericNode/contentExchange/ClientUnit.h \
+	src/genericNode/contentExchange/static/state/State.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
+	src/genericNode/contentExchange/ServerUnit.h
+$O/src/genericNode/contentExchange/static/handler/DownloadersBase.o: src/genericNode/contentExchange/static/handler/DownloadersBase.cc \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
+	src/coordinate/command/Commands.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
 	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
+	$(INET_PROJ)/src/transport/udp/UDP.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
+	src/genericNode/contentExchange/ServerUnit.h \
+	src/genericNode/contentExchange/static/handler/DownloadersBase.h \
+	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	$(INET_PROJ)/src/base/INETDefs.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
+	$(INET_PROJ)/src/transport/tcp/TCP.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/StateTester.h \
+	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/genericNode/contentExchange/ClientUnit.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/coordinate/stats/Stats.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
+	src/execption/Exceptions.h \
+	src/coordinate/command/CDN_Commands.h \
+	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
+	src/genericNode/contentExchange/static/state/State.h
+$O/src/genericNode/contentExchange/static/handler/Handler.o: src/genericNode/contentExchange/static/handler/Handler.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/command/Command.h
+$O/src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.o: src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.cc \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
+	src/coordinate/stats/LogEntry.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
+	src/genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
+	src/coordinate/command/Commands.h \
+	src/cache/Cache.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
+	src/cache/InformationSet.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
+	$(INET_PROJ)/src/transport/contract/TCPCommand_m.h \
+	src/genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
+	src/genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
 	$(INET_PROJ)/src/transport/contract/UDPSocket.h \
-	coordinate/stats/LogEntry.h \
+	src/coordinate/CentralUnit.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
+	src/cache/LruCache.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	cache/Cache.h \
-	genericNode/contentExchange/static/handler/Handler.h \
+	src/genericNode/contentExchange/Negotiator.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ServerUnit.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocketMap.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientNegotiator.h \
-	cache/LruCache.h \
-	genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/handler/DownloadersBase.h \
 	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerUnit.h \
-	genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	message/RequestMessage.h \
-	genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
 	$(INET_PROJ)/src/transport/contract/TCPSocket.h \
-	genericNode/contentExchange/static/handler/StaticContentExchange_TCPClientHandler.h \
 	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServicePeer.h \
-	message/Request.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/StateTester.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
-	coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/ClientUnit.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/StaticContentExchange_AlternateServerDetector.h \
-	genericNode/contentExchange/static/handler/DownloadersBase.h \
-	message/InterNodeRequestProtocol.h \
-	genericNode/contentExchange/static/StaticContentExchange_StateTester.h \
-	coordinate/command/Commands.h \
-	genericNode/contentExchange/static/StaticContentExchange_ClientUnit.h \
-	genericNode/contentExchange/ServerUnit.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage.h \
-	coordinate/command/CDN_Commands.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
-	genericNode/contentExchange/static/StaticContentExchange_ServerNegotiator.h \
-	genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/CDN_CentralUnit.h \
+	src/coordinate/stats/Stats.h \
+	src/coordinate/stats/CacheLogEntry.h \
+	src/genericNode/contentExchange/ServicePeer.h \
+	src/coordinate/CDN_RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/AlternateServerDetector.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/genericNode/contentExchange/RequestsAssignerReceiver.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
-	genericNode/contentExchange/static/handler/StaticContentExchange_UDPServerHandler.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
+	src/execption/Exceptions.h \
+	src/coordinate/command/CDN_Commands.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
-	genericNode/contentExchange/static/state/State.h
-$O/genericNode/contentExchange/static/message/StaticObjectMessage.o: genericNode/contentExchange/static/message/StaticObjectMessage.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	message/Request.h \
-	coordinate/stats/LogEntry.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	coordinate/stats/RequestLogEntry.h \
-	genericNode/contentExchange/static/message/StaticObjectMessage.h
-$O/genericNode/contentExchange/static/message/StaticObject.o: genericNode/contentExchange/static/message/StaticObject.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
-	genericNode/contentExchange/static/message/ServableItem.h
-$O/genericNode/contentExchange/static/message/ServableItem.o: genericNode/contentExchange/static/message/ServableItem.cc \
-	genericNode/contentExchange/static/message/ServableItem.h
-$O/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.o: genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.cc \
-	genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h
-$O/genericNode/contentExchange/static/state/State.o: genericNode/contentExchange/static/state/State.cc \
-	cache/InformationSet.h \
-	genericNode/contentExchange/static/state/State.h
-$O/genericNode/contentExchange/static/state/StaticContentExchange_State.o: genericNode/contentExchange/static/state/StaticContentExchange_State.cc \
-	genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/state/State.h
+$O/src/genericNode/contentExchange/static/message/StaticObject.o: src/genericNode/contentExchange/static/message/StaticObject.cc \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h
+$O/src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.o: src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.cc \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h
+$O/src/genericNode/contentExchange/static/message/ServableItem.o: src/genericNode/contentExchange/static/message/ServableItem.cc \
+	src/genericNode/contentExchange/static/message/ServableItem.h
+$O/src/genericNode/contentExchange/static/message/StaticObjectMessage.o: src/genericNode/contentExchange/static/message/StaticObjectMessage.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage_Base_m.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/message/StaticObjectMessage.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/command/Command.h
+$O/src/genericNode/contentExchange/static/state/State.o: src/genericNode/contentExchange/static/state/State.cc \
+	src/genericNode/contentExchange/static/state/State.h \
+	src/cache/InformationSet.h
+$O/src/genericNode/contentExchange/static/state/StaticContentExchange_State.o: src/genericNode/contentExchange/static/state/StaticContentExchange_State.cc \
 	$(INET_PROJ)/src/transport/contract/UDPControlInfo_m.h \
-	genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/state/StaticContentExchange_State.h \
+	src/genericNode/contentExchange/static/handler/Handler.h \
 	$(INET_PROJ)/src/base/INETDefs.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	cache/InformationSet.h \
-	execption/Exceptions.h \
-	genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/command/StaticContentExchange_ServicePeerCommand.h \
+	src/genericNode/contentExchange/static/message/StaticObject.h \
+	src/genericNode/contentExchange/static/command/Command.h \
+	src/coordinate/stats/LogEntry.h \
 	$(INET_PROJ)/src/transport/tcp/TCP.h \
-	message/Request.h \
-	coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddressResolver.h \
 	$(INET_PROJ)/src/networklayer/contract/IPvXAddress.h \
+	src/execption/Exceptions.h \
 	$(INET_PROJ)/src/transport/udp/UDP.h \
-	genericNode/contentExchange/static/handler/Handler.h \
-	cache/Cache.h \
-	coordinate/stats/RequestLogEntry.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/state/State.h \
 	$(INET_PROJ)/src/networklayer/contract/IPv6Address.h \
 	$(INET_PROJ)/src/networklayer/contract/IPAddress.h \
-	genericNode/contentExchange/static/state/State.h
-$O/message/RequestMessage_Base_m.o: message/RequestMessage_Base_m.cc \
-	message/RequestMessage_Base_m.h
-$O/message/Request.o: message/Request.cc \
-	message/Request.h \
-	coordinate/stats/LogEntry.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	coordinate/stats/RequestLogEntry.h
-$O/message/InterNodeRequestProtocol.o: message/InterNodeRequestProtocol.cc \
-	message/Request.h \
-	message/RequestMessage_Base_m.h \
-	coordinate/stats/LogEntry.h \
-	message/InterNodeRequestProtocol.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	coordinate/stats/RequestLogEntry.h \
-	message/RequestMessage.h
-$O/message/RequestMessage.o: message/RequestMessage.cc \
-	message/Request.h \
-	message/RequestMessage_Base_m.h \
-	coordinate/stats/LogEntry.h \
-	genericNode/contentExchange/static/command/Command.h \
-	genericNode/contentExchange/static/message/ServableItem.h \
-	coordinate/stats/RequestLogEntry.h \
-	message/RequestMessage.h
+	src/cache/Cache.h \
+	src/cache/InformationSet.h
+$O/src/message/RequestMessage.o: src/message/RequestMessage.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/message/RequestMessage.h \
+	src/message/RequestMessage_Base_m.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/command/Command.h
+$O/src/message/RequestMessage_Base_m.o: src/message/RequestMessage_Base_m.cc \
+	src/message/RequestMessage_Base_m.h
+$O/src/message/InterNodeRequestProtocol.o: src/message/InterNodeRequestProtocol.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/message/RequestMessage.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/message/RequestMessage_Base_m.h \
+	src/message/InterNodeRequestProtocol.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/command/Command.h
+$O/src/message/Request.o: src/message/Request.cc \
+	src/coordinate/stats/LogEntry.h \
+	src/message/Request.h \
+	src/genericNode/contentExchange/static/message/ServableItem.h \
+	src/coordinate/stats/RequestLogEntry.h \
+	src/genericNode/contentExchange/static/command/Command.h
 
