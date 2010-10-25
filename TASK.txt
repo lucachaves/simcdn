@@ -1,0 +1,11 @@
+Gerar Nclientes no CDN (Definier host, switch)
+Estudar estratégias de distribuição mínima e inteligente na rede
+Atualizaçao de Topologia (Arvore de Disktra)
+Remover Requisição Menor Path Interativo
+Transformar comandos em UDP
+Implementar o statistics dinamicamente
+
+Implementar utilização do consumo do enlace
+Numero de Hops de uma requisição
+Unitilização dos Nós
+Número de pacotes de comandos e dados
