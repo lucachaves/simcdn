@@ -13,7 +13,7 @@
 //You should have received a copy of the GNU General Public License
 //along with CDNsim; if not, write to the Free Software
 //Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-package genericNode.contentExchange.static.handler;
+package src.simulator.genericNode.contentExchange.static.handler;
 simple Handler
 {
     parameters:

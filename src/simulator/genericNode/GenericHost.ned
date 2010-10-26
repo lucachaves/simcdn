@@ -14,7 +14,7 @@
 //along with CDNsim; if not, write to the Free Software
 //Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-package genericNode;
+package src.simulator.genericNode;
 
 import inet.transport.tcp.TCP;
 import inet.networklayer.common.InterfaceTable;
@@ -26,18 +26,18 @@ import inet.base.NotificationBoard;
 import inet.util.NAMTraceWriter;
 import inet.transport.udp.UDP;
 import inet.applications.udpapp.UDPApp;
-import coordinate.CDN_RequestsAssignerReceiver;
-import genericNode.contentExchange.static.StaticContentExchange_AlternateServerDetector;
-import genericNode.contentExchange.static.handler.StaticContentExchange_TCPClientHandler;
-import genericNode.contentExchange.static.handler.StaticContentExchange_UDPClientHandler;
-import genericNode.contentExchange.static.StaticContentExchange_ClientNegotiator;
-import genericNode.contentExchange.static.StaticContentExchange_ClientUnit;
-import genericNode.contentExchange.static.handler.StaticContentExchange_TCPServerHandler;
-import genericNode.contentExchange.static.handler.StaticContentExchange_UDPServerHandler;
-import genericNode.contentExchange.static.StaticContentExchange_ServicePeer;
-import genericNode.contentExchange.static.StaticContentExchange_StateTester;
-import genericNode.contentExchange.static.StaticContentExchange_ServerUnit;
-import genericNode.contentExchange.static.StaticContentExchange_ServerNegotiator;
+import src.simulator.coordinate.CDN_RequestsAssignerReceiver;
+import src.simulator.genericNode.contentExchange.static.StaticContentExchange_AlternateServerDetector;
+import src.simulator.genericNode.contentExchange.static.handler.StaticContentExchange_TCPClientHandler;
+import src.simulator.genericNode.contentExchange.static.handler.StaticContentExchange_UDPClientHandler;
+import src.simulator.genericNode.contentExchange.static.StaticContentExchange_ClientNegotiator;
+import src.simulator.genericNode.contentExchange.static.StaticContentExchange_ClientUnit;
+import src.simulator.genericNode.contentExchange.static.handler.StaticContentExchange_TCPServerHandler;
+import src.simulator.genericNode.contentExchange.static.handler.StaticContentExchange_UDPServerHandler;
+import src.simulator.genericNode.contentExchange.static.StaticContentExchange_ServicePeer;
+import src.simulator.genericNode.contentExchange.static.StaticContentExchange_StateTester;
+import src.simulator.genericNode.contentExchange.static.StaticContentExchange_ServerUnit;
+import src.simulator.genericNode.contentExchange.static.StaticContentExchange_ServerNegotiator;
 module GenericHost
 {
     parameters:
