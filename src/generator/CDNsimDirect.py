@@ -349,8 +349,8 @@ fout = open("./RNP/bootle/"+bottleName+"/base.ned", "w")
 fout.write(temp.replace(temp[temp.find("r0: Router"):temp.find("c57: GenericHost")], newContent))
 fout.close()
 print "Copy Bootle to Models"
-os.system("cp \"./RNP/bootle/"+bottleName+"\" \"../../models/"+bottleName+"\"")
-os.system("rm -rf \"../../src/generetor/RNP/bootle/"+bottleName+"\"")
+os.system("cp -r \"./RNP/bootle/"+bottleName+"\" \"../../models/"+bottleName+"\"")
+os.system("rm -rf \"./RNP/bootle/"+bottleName+"\"")
 print "Finished!"
 
 
