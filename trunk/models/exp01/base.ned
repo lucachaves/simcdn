@@ -5,9 +5,9 @@ import inet.networklayer.autorouting.FlatNetworkConfigurator;
 import inet.nodes.inet.Router;
 import inet.nodes.inet.StandardHost;
 import ned.DatarateChannel;
-import coordinate.CDN_CentralUnit;
-import coordinate.stats.Stats;
-import genericNode.GenericHost;
+import src.simulator.coordinate.CDN_CentralUnit;
+import src.simulator.coordinate.stats.Stats;
+import src.simulator.genericNode.GenericHost;
 
 channel fiberline extends DatarateChannel
 {

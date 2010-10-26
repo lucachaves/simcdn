@@ -14,7 +14,7 @@
 //along with CDNsim; if not, write to the Free Software
 //Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-package genericNode.contentExchange;
+package src.simulator.genericNode.contentExchange;
 
 simple AlternateServerDetector
 {

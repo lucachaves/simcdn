@@ -9,3 +9,6 @@ Implementar utilização do consumo do enlace
 Numero de Hops de uma requisição
 Unitilização dos Nós
 Número de pacotes de comandos e dados
+
+Bootle(zipf, segment,)
+Colocar o Stats e CDNUNIT com logo
