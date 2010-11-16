@@ -46,19 +46,11 @@ INCLUDE_PATH = \
     -Imodels/exp02 \
     -Imodels/exp02/caches \
     -Imodels/exp02/dataset \
-    -Imodels/exp02/exp02 \
-    -Imodels/exp02/exp02/caches \
-    -Imodels/exp02/exp02/dataset \
-    -Imodels/exp02/exp02/stats \
     -Imodels/exp02/stats \
     -Isrc \
     -Isrc/generator \
     -Isrc/generator/RNP \
     -Isrc/generator/RNP/bootle \
-    -Isrc/generator/RNP/bootle/exp02 \
-    -Isrc/generator/RNP/bootle/exp02/caches \
-    -Isrc/generator/RNP/bootle/exp02/dataset \
-    -Isrc/generator/RNP/bootle/exp02/stats \
     -Isrc/generator/estados \
     -Isrc/simulator \
     -Isrc/simulator/cache \
@@ -215,19 +207,11 @@ clean:
 	-rm -f models/exp02/*_m.cc models/exp02/*_m.h
 	-rm -f models/exp02/caches/*_m.cc models/exp02/caches/*_m.h
 	-rm -f models/exp02/dataset/*_m.cc models/exp02/dataset/*_m.h
-	-rm -f models/exp02/exp02/*_m.cc models/exp02/exp02/*_m.h
-	-rm -f models/exp02/exp02/caches/*_m.cc models/exp02/exp02/caches/*_m.h
-	-rm -f models/exp02/exp02/dataset/*_m.cc models/exp02/exp02/dataset/*_m.h
-	-rm -f models/exp02/exp02/stats/*_m.cc models/exp02/exp02/stats/*_m.h
 	-rm -f models/exp02/stats/*_m.cc models/exp02/stats/*_m.h
 	-rm -f src/*_m.cc src/*_m.h
 	-rm -f src/generator/*_m.cc src/generator/*_m.h
 	-rm -f src/generator/RNP/*_m.cc src/generator/RNP/*_m.h
 	-rm -f src/generator/RNP/bootle/*_m.cc src/generator/RNP/bootle/*_m.h
-	-rm -f src/generator/RNP/bootle/exp02/*_m.cc src/generator/RNP/bootle/exp02/*_m.h
-	-rm -f src/generator/RNP/bootle/exp02/caches/*_m.cc src/generator/RNP/bootle/exp02/caches/*_m.h
-	-rm -f src/generator/RNP/bootle/exp02/dataset/*_m.cc src/generator/RNP/bootle/exp02/dataset/*_m.h
-	-rm -f src/generator/RNP/bootle/exp02/stats/*_m.cc src/generator/RNP/bootle/exp02/stats/*_m.h
 	-rm -f src/generator/estados/*_m.cc src/generator/estados/*_m.h
 	-rm -f src/simulator/*_m.cc src/simulator/*_m.h
 	-rm -f src/simulator/cache/*_m.cc src/simulator/cache/*_m.h
@@ -248,7 +232,7 @@ cleanall: clean
 	-rm -rf $(PROJECT_OUTPUT_DIR)
 
 depend:
-	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc models/*.cc models/exp01/*.cc models/exp01/caches/*.cc models/exp01/dataset/*.cc models/exp01/results/*.cc models/exp01/stats/*.cc models/exp02/*.cc models/exp02/caches/*.cc models/exp02/dataset/*.cc models/exp02/exp02/*.cc models/exp02/exp02/caches/*.cc models/exp02/exp02/dataset/*.cc models/exp02/exp02/stats/*.cc models/exp02/stats/*.cc src/*.cc src/generator/*.cc src/generator/RNP/*.cc src/generator/RNP/bootle/*.cc src/generator/RNP/bootle/exp02/*.cc src/generator/RNP/bootle/exp02/caches/*.cc src/generator/RNP/bootle/exp02/dataset/*.cc src/generator/RNP/bootle/exp02/stats/*.cc src/generator/estados/*.cc src/simulator/*.cc src/simulator/cache/*.cc src/simulator/coordinate/*.cc src/simulator/coordinate/command/*.cc src/simulator/coordinate/stats/*.cc src/simulator/execption/*.cc src/simulator/genericNode/*.cc src/simulator/genericNode/contentExchange/*.cc src/simulator/genericNode/contentExchange/static/*.cc src/simulator/genericNode/contentExchange/static/command/*.cc src/simulator/genericNode/contentExchange/static/handler/*.cc src/simulator/genericNode/contentExchange/static/message/*.cc src/simulator/genericNode/contentExchange/static/state/*.cc src/simulator/message/*.cc
+	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc models/*.cc models/exp01/*.cc models/exp01/caches/*.cc models/exp01/dataset/*.cc models/exp01/results/*.cc models/exp01/stats/*.cc models/exp02/*.cc models/exp02/caches/*.cc models/exp02/dataset/*.cc models/exp02/stats/*.cc src/*.cc src/generator/*.cc src/generator/RNP/*.cc src/generator/RNP/bootle/*.cc src/generator/estados/*.cc src/simulator/*.cc src/simulator/cache/*.cc src/simulator/coordinate/*.cc src/simulator/coordinate/command/*.cc src/simulator/coordinate/stats/*.cc src/simulator/execption/*.cc src/simulator/genericNode/*.cc src/simulator/genericNode/contentExchange/*.cc src/simulator/genericNode/contentExchange/static/*.cc src/simulator/genericNode/contentExchange/static/command/*.cc src/simulator/genericNode/contentExchange/static/handler/*.cc src/simulator/genericNode/contentExchange/static/message/*.cc src/simulator/genericNode/contentExchange/static/state/*.cc src/simulator/message/*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/src/simulator/cache/LruCache.o: src/simulator/cache/LruCache.cc \
