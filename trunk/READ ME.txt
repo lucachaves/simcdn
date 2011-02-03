@@ -1,6 +1,18 @@
 Omnet++ 4.1
-inet-20100723 (com a alteração do TCP e UDP)
 
+
+Estrutura do model
+	caches - segid amazenado
+	dataset - cronograma de requisção (tempo, conteúdo e tipo) e objetos (segid, tamanho e arqid)
+	stats - coleta de dados
+	ned - arqivo de estrutura (fiberline, router, generichost e ligações) do modelo de simulação
+	ini - arquivo de parâmetros de configuração
+
+
+
+
+
+inet-20100723 (com a alteração do TCP e UDP)
 (public)
 TCP.h
 
