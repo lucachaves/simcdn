@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by opp_msgc 4.1 from genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg.
+// Generated file, do not edit! Created by opp_msgc 4.1 from src/simulator/genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg.
 //
 
 #ifndef _STATICOBJECTMESSAGE_BASE_M_H_
@@ -16,7 +16,7 @@
 
 
 /**
- * Class generated from <tt>genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg</tt> by opp_msgc.
+ * Class generated from <tt>src/simulator/genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg</tt> by opp_msgc.
  * <pre>
  * packet StaticObjectMessage
  * {

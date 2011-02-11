@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by opp_msgc 4.1 from genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg.
+// Generated file, do not edit! Created by opp_msgc 4.1 from src/simulator/genericNode/contentExchange/static/message/StaticObjectMessage_Base.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:

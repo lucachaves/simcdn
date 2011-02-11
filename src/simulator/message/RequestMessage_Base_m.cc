@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by opp_msgc 4.1 from message/RequestMessage_Base.msg.
+// Generated file, do not edit! Created by opp_msgc 4.1 from src/simulator/message/RequestMessage_Base.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:
