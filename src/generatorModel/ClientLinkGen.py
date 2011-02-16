@@ -1,7 +1,14 @@
 import re
 import random
-import numpy as np
+import numpy
 
+
+def generateLink(kind, clientSize, configModel, pop, numServer):
+    if cmp(kind, "zipf") == 0:
+        #clientZipf(clientSize, configModel, pop, numServer)
+        clientPropor(clientSize, configModel, pop, numServer)
+    if cmp(kind, "uniforme") == 0:
+        clientUnifor(clientSize, configModel, pop, numServer)
 
 #Generate links by percentage of POP in networking
 def clientPropor(clientSize, configModel, pop, numServer):
@@ -34,7 +41,7 @@ def clientPropor(clientSize, configModel, pop, numServer):
 # Generate Client by Zipf        
 def clientZipf(clientSize, configModel, pop, numServer):
     fout = open("./"+configModel+"/clientsLink", 'w')
-    varaibles = np.random.zipf(2, clientSize)
+    varaibles = numpy.random.zipf(2, clientSize)
     for value in varaibles:
         fout.write(str(value+numServer)+"\n")
 
