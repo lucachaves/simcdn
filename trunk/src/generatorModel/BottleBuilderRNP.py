@@ -102,6 +102,7 @@ def processAndSaveTraffic(parent, clients, traffic):
 		#if processTraffic:
 		#	distributedTraffic[    random.randint(0, clients - 1)   ] += [patRes.group(1) + ' ' + patRes.group(7) + '\n']
 		#else:
+		##print patRes.group(5)+"->"+patRes.group(1) + ' ' + patRes.group(7) + ' u\n'
 		distributedTraffic[     clientsReference[int(patRes.group(5))]   ] += [patRes.group(1) + ' ' + patRes.group(7) + ' u\n']
 
 	for key in distributedTraffic.keys():
@@ -490,6 +491,7 @@ def prepareCaches(parent, options):
 			line = line[:len(line) - 1]
 
 		cacheType = line
+		cacheType = options.cacheType
 
 		#read cache size in bytes
 		line = fin.readline()
@@ -501,8 +503,7 @@ def prepareCaches(parent, options):
 			showSomeError(parent, "Error: While reading placement file, invalid file format. Excpected cache size")
 			return 1
 		cacheSize = float(patRes.group(1))
-
-		expectedSurrogatesRange.remove(currentSurrogateIndex)
+		cacheSize = options.cacheSize
 
 		if(file != "NULL"):
 			#verify that the file has proper format and that it fits in cache
@@ -520,9 +521,9 @@ def prepareCaches(parent, options):
 		bottleAttributes.surrogatesCaches[bottleAttributes.surrogatesIds[currentSurrogateIndex]] = ["./caches/" + str(bottleAttributes.surrogatesIds[currentSurrogateIndex]), cacheType, cacheSize]
 
 
-	if len(expectedSurrogatesRange) != 0:
-		showSomeError(parent, "Error: While reading placement file, invalid file format. Not all surrogates' caches are configured")
-		return 1
+	#if len(expectedSurrogatesRange) != 0:
+	#	showSomeError(parent, "Error: While reading placement file, invalid file format. Not all surrogates' caches are configured")
+	#	return 1
 
 	fin.close()
 

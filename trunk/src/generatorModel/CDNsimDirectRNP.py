@@ -9,124 +9,12 @@ from os.path import dirname
 from BottleBuilderRNP import buildBottleRNP
 
 
-class OptionsTeste:
-    currentPath = None
-    policy = None
 
-    routersGraphFile = None
-    clients = None
-    surrogates = None
-    origins = None
-    linkSpeed = None
-
-    clientsOut = None
-    surrogatesOut = None
-    surrogatesIn = None
-    originsIn = None
-
-    traffic = None
-    objects = None
-
-    placement = None
-    placementDir = None
-
-    outputDir = None
-    cdnsimDir = None
-    bottleName = None
-    inetDir = None
-    omnetppDir = None
-
-    nRetries = None
-    mean = None
-
-    shrink = None
-    netSeed = 0
-    traceSeed = 0
-    
-    package = None
-
-
-
-class MyApp(wx.App):
-    def OnInit(self):
-        options = OptionsTeste()
-
-        cdnsimInstallationDir = dirname(dirname(sys.path[0]))
-        options.currentPath = "./"+configModel+"/"
-        
-        options.outputDir = options.currentPath+"bootle"
-        options.bottleName = bottleName
-        options.package = "models."+options.bottleName
-        
-        options.placement = options.currentPath+"placement"
-        options.placementDir =  options.currentPath 
-        options.shrink = False
-        
-        options.traffic = options.currentPath+"traffic"
-        options.objects = options.currentPath+"website"
-         
-        options.linkSpeed = 1000
-        options.routersGraphFile = options.currentPath+"/routersLink" 
-        options.clients = numClient
-        options.surrogates = 27 
-        options.origins = numServer
-        
-        options.clientsOut = 1000 
-        options.surrogatesOut = 1000
-        options.surrogatesIn = 1000
-        options.originsIn = 1000
-        options.nRetries = 3
-        options.mean = 5
-        
-        options.policy = "0"
-              
-        buildBottleRNP(None, options)
-        
-        return True
-    
-'''Parameters'''
-pop = 27
-numServer = 27
-configModel = "configModel"
-bottleName = "exp01"
-numSeg = 0
-sizeSeg = 1000
-''' Factor and Level '''
-numClient = 10 #10^1, 10^2, 10^3, 10^4, 10^5
-ClientDistr = "zipf" #zipf, uniforme
-numTraffic = 10 #10^3, 10^4, 10^5
-gamaDistribution = 30 #30s, 60s
-permanence = 10 #10%, 25%, 50%, 100%
-start = 0 #
-popularity = "zipf" #zipf
-location = "propor" #
-cacheSize = 10 #
-cacheKind = "LRU" #LRU, LFU
-selectionServer = "NFC" #
-numFile = 50
-timeFile = 0
-bitrate = 0
-sizeFile = 0
-
-'''Generator Script'''
-os.system("rm -rf \"../../models/"+bottleName+"\"")
-print "Generate Client Link"
-ClientLinkGen.clientPropor(numClient, configModel, pop, numServer)
-print "Generate Website"
-numSeg = SegWebsiteGen.webSite(numFile, configModel, sizeSeg)
-#print "Num of Seg " + str(numSeg)
-print "Generate Traffic"
-SegTrafficGen.gapPoisson(numClient, numTraffic, numSeg, configModel)
-print "Generate Bootle"
-app = MyApp(0)
-app.MainLoop()
-print "Modify Content"
-OrigenContentGen.modifyContent(bottleName, 27, numFile, configModel)
-print "Modify need for RNP"
-fr = open("./"+configModel+"/bootle/"+bottleName+"/base.ned", "r")
-temp = fr.read()
-fr.close() 
-newContent = """
+def modifyNeed(configModel, bottleName):
+    fr = open("./" + configModel + "/bootle/" + bottleName + "/base.ned", "r")
+    temp = fr.read()
+    fr.close()
+    newContent = """
         r0: Router {
             parameters:
                 @display("i=abstract/router;p=202,231");
@@ -356,9 +244,131 @@ newContent = """
                 @display("i=abstract/router;p=347,826");
         }
         """
-fout = open("./"+configModel+"/bootle/"+bottleName+"/base.ned", "w")
-fout.write(temp.replace(temp[temp.find("r0: Router"):temp.find("c57: GenericHost")], newContent))
-fout.close()
+    fout = open("./" + configModel + "/bootle/" + bottleName + "/base.ned", "w")
+    fout.write(temp.replace(temp[temp.find("r0: Router"):temp.find("c57: GenericHost")], newContent))
+    fout.close()
+
+class OptionsTeste:
+    currentPath = None
+    policy = None
+
+    routersGraphFile = None
+    clients = None
+    surrogates = None
+    origins = None
+    linkSpeed = None
+
+    clientsOut = None
+    surrogatesOut = None
+    surrogatesIn = None
+    originsIn = None
+
+    traffic = None
+    objects = None
+
+    placement = None
+    placementDir = None
+
+    outputDir = None
+    cdnsimDir = None
+    bottleName = None
+    inetDir = None
+    omnetppDir = None
+
+    nRetries = None
+    mean = None
+
+    shrink = None
+    netSeed = 0
+    traceSeed = 0
+    
+    package = None
+    
+    cacheType = None
+    cacheSize = 0
+
+
+
+class MyApp(wx.App):
+    def OnInit(self):
+        options = OptionsTeste()
+
+        cdnsimInstallationDir = dirname(dirname(sys.path[0]))
+        options.currentPath = "./"+configModel+"/"
+        
+        options.outputDir = options.currentPath+"bootle"
+        options.bottleName = bottleName
+        options.package = "models."+options.bottleName
+        
+        options.placement = options.currentPath+"placement"
+        options.placementDir =  options.currentPath 
+        options.shrink = False
+        
+        options.traffic = options.currentPath+"traffic"
+        options.objects = options.currentPath+"website"
+         
+        options.linkSpeed = 1000
+        options.routersGraphFile = options.currentPath+"/routersLink" 
+        options.clients = numClient
+        options.surrogates = 27 
+        options.origins = numServer
+        
+        options.clientsOut = 1000 
+        options.surrogatesOut = 1000
+        options.surrogatesIn = 1000
+        options.originsIn = 1000
+        options.nRetries = 3
+        options.mean = 5
+        
+        options.policy = "0"
+        
+        options.cacheSize = cacheSize
+        options.cacheType = cacheKind
+              
+        buildBottleRNP(None, options)
+        
+        return True
+    
+'''Parameters'''
+pop = 27
+numServer = 27
+configModel = "configModel"
+bottleName = "exp01"
+numSeg = 0
+sizeSeg = 50000
+''' Factor and Level '''
+numClient = 10 #10^1, 10^2, 10^3, 10^4, 10^5 (ClientLinkGen)
+clientDistr = "zipf" #zipf, uniforme, pro (ClientLinkGen)
+numTraffic = 100 #10^3, 10^4, 10^5 (SegTrafficGen)
+gamaDistribution = 30 #30s, 60s exponetial (fixo SegTrafficGen)
+permanence = "uniforme" #10%, 25%, 50%, 100% uniforme (fixo SegTrafficGen)
+start = "pareto" #pareto (fixo SegTrafficGen)
+popularity = "zipf" #zipf (fixo SegTrafficGen)
+location = "propor" #propor (fixo OrigenContenGen) 
+cacheSize = 1.0*10**7 #10^7, 10^9, infinito tamanho em byte (BottleBuilderRNP)
+cacheKind = "LRU" #LRU, LFU (BottleBuilderRNP)
+selectionServer = "NFC" #NFC, NMC, NMCL, Balanced, RSC, Random (FALTA USAR)
+numFile = 50 #10^3, 10^4, 10^5 (SegWebsiteGen)(FALTA FAZER a distribuicao no OrigenContentGen)
+timeFile = "Pareto" #(fixo SegWebsiteGen)
+bitrate = 128 #128, 256, 1024 (SegWebsiteGen)
+sizeFile = 0 #Calculado no SegWebsiteGem pelo timeFile e bitrate (SegWebsiteGen)
+
+'''Generator Script'''
+os.system("rm -rf \"../../models/"+bottleName+"\"")
+print "Generate Client Link"
+ClientLinkGen.generateLink(clientDistr, numClient, configModel, pop, numServer)
+print "Generate Website"
+numSeg = SegWebsiteGen.webSite(numFile, configModel, sizeSeg, bitrate)
+#print "Num of Seg " + str(numSeg)
+print "Generate Traffic"
+SegTrafficGen.gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDistribution, sizeSeg)
+print "Generate Bootle"
+app = MyApp(0)
+app.MainLoop()
+print "Modify Content"
+OrigenContentGen.modifyContent(bottleName, 27, numFile, configModel)
+print "Modify need for RNP"
+modifyNeed(configModel, bottleName)
 print "Copy Bootle to Models"
 os.system("cp -r \"./"+configModel+"/bootle/"+bottleName+"\" \"../../models/"+bottleName+"\"")
 os.system("rm -rf \"./"+configModel+"/bootle/"+bottleName+"\"")
