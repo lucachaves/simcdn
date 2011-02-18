@@ -1,22 +1,26 @@
-import numpy as np
+import numpy
 
-def webSite(numFile, configModel, sizeSeg, bitrate):
+def generatePage(numTotalFile, repGenModel, sizeSeg, bitrate, timeFilePareto):
     #bitrate
-    fout = open("./"+configModel+"/website", 'w')
-    a, m = 3., 5.
-    variables = np.random.pareto(a, numFile) + m #time
-    #print variables #time
-    variable = variables*bitrate #size
-    #print variable #size
+    fout = open("./"+repGenModel+"/website", 'w')
+    
+    timesFile = numpy.random.pareto(3., numTotalFile) + 5. #time in minute (avg 5m)
+    #print timesFile #time
+    sizesFile = timesFile*60*bitrate #size (x60 convert to second)
+    #print sizesFile #size
+    
     content = ""
     numSeg = 0
-    for value in range(0, numFile):
-        for flag in range(0, int(variable[value]*1000/sizeSeg)):
-            content += str(numSeg)+" "+str(sizeSeg)+" "+str(value)+"\n"
-            numSeg = numSeg + 1
-        if (variable[value]*1000)%sizeSeg != 0:
-            content += str(numSeg)+" "+str((variable[value]*1000)%sizeSeg)+" "+str(value)+"\n"
-            numSeg = numSeg + 1
+    for numFile in range(0, numTotalFile):
+        for flag in range(0, int(sizesFile[numFile]/sizeSeg)):
+            content += str(numSeg)+" "+str(sizeSeg)+" "+str(numFile)+"\n"
+            numSeg += 1
+        if (sizesFile[numFile])%sizeSeg != 0:
+            content += str(numSeg)+" "+str((sizesFile[numFile])%sizeSeg)+" "+str(numFile)+"\n"
+            numSeg += 1
+    
+    
     fout.write(content)
     fout.close()
+    
     return numSeg

@@ -1,45 +1,50 @@
 import os
 import numpy
 
-def modifyContent(bottleName, servers, numFile, configModel):
+def generateContentInOrigen(numTotalServer, numTotalFile, bottleName, configModel):
+    
     fileProject = "./"+configModel+"/bootle/"+bottleName
     fout = open(fileProject+"/dataset/objects","r")
+    
     segmentsReference = []
     for line in fout:
         segmentsReference.append(line);
     fout.close()
+    
     segFile = {}
-    for x in range(0, numFile):
-        segFile[x] = []
-    #print segFile
-    for seg in segmentsReference:
-        x = seg.split()
-        value = x[0]
-        key = x[-1]
-        segFile[int(key)] += [value]
-    #print segFile
+    for numFile in range(0, numTotalFile):
+        segFile[numFile] = []
+        
+    for line in segmentsReference:
+        line = line.split()
+        idSeg = line[0]
+        idFile = line[-1]
+        segFile[int(idFile)] += [idSeg]
+
     pages = {}
-    for x in range(0, numFile):
-        pages[x] = []
+    for numFile in range(0, numTotalFile):
+        pages[numFile] = []
+        
     i = 0    
-    for server in numpy.random.uniform(1, servers, numFile):
-        pages[i] = numpy.random.uniform(0, servers, int(server))
-        i = i + 1
+    for server in numpy.random.uniform(1, numTotalServer, numTotalFile):
+        pages[i] = numpy.random.uniform(0, numTotalServer, int(server))
+        i += 1
     #print pages
         
     pagesInServers ={}
-    for x in range(0, servers):
-        pagesInServers[x] = []
+    for numServer in range(0, numTotalServer):
+        pagesInServers[numServer] = []
+        
     #print pagesInServers
-    for page, servs in pages.iteritems():
-        for serv in servs:
-            pagesInServers[int(serv)] += [page]
+    for page, servers in pages.iteritems():
+        for server in servers:
+            pagesInServers[int(server)] += [page]
     #print pagesInServers
-    for page, servs in pagesInServers.iteritems():
-        pagesInServers[page] = sorted(list(set(servs)))
+    for page, servers in pagesInServers.iteritems():
+        pagesInServers[page] = sorted(list(set(servers)))
     #print pagesInServers
-    for serve in range(0,servers):
-        filename = fileProject+"/caches/originsContent"+str(serve+1) 
+    for numServer in range(0,numTotalServer):
+        filename = fileProject+"/caches/originsContent"+str(numServer+1) 
         existContent = ""
         if os.path.exists(filename):
             fr = open(filename, "r")
@@ -47,7 +52,7 @@ def modifyContent(bottleName, servers, numFile, configModel):
             fr.close()
         fin = open(filename, "w")
         fin.write(existContent)
-        for page in pagesInServers[serve]:
+        for page in pagesInServers[numServer]:
             for seg in segFile[page]:
                 fin.write(seg+' s\n')
         fin.close()

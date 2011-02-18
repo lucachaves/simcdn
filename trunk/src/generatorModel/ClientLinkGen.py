@@ -3,7 +3,7 @@ import random
 import numpy
 
 
-def generateLink(kind, clientSize, configModel, pop, numServer):
+def generateLinks(kind, clientSize, configModel, pop, numServer):
     if cmp(kind, "zipf") == 0:
         #clientZipf(clientSize, configModel, pop, numServer)
         clientPropor(clientSize, configModel, pop, numServer)
@@ -41,16 +41,16 @@ def clientPropor(clientSize, configModel, pop, numServer):
 # Generate Client by Zipf        
 def clientZipf(clientSize, configModel, pop, numServer):
     fout = open("./"+configModel+"/clientsLink", 'w')
-    varaibles = numpy.random.zipf(2, clientSize)
+    varaibles = numpy.random.zipf(2, clientSize)+numServer
     for value in varaibles:
-        fout.write(str(value+numServer)+"\n")
+        fout.write(str(int(value))+"\n")
 
 # Generate Client by Uniforme
 def clientUnifor(clientSize, configModel, pop, numServer):
     fout = open("./"+configModel+"/clientsLink", 'w')
     links = numpy.random.uniform(0, pop, clientSize)+numServer
     for link in links:
-        fout.write(str(link)+"\n")
+        fout.write(str(int(link))+"\n")
 
 # Generate Client by Ramdon    
 def clientRamd(clientSize, configModel, pop, numServer):

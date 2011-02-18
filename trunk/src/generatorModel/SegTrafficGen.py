@@ -1,75 +1,77 @@
 import numpy
 import random
 
-def gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDistribution, sizeSeg, bitrate):
+def generateTraffic(numClient, numTraffic, numTotalFile, configModel, bottleName, gapFileExponetial, absSizeSeg, bitrate):
     fout = open("./"+configModel+"/traffic", 'w')
     
     #obter os segmentos de um arquivo
-    fileProject = "./"+configModel#+"/bootle/"+bottleName
+    fileProject = "./"+configModel
     fin = open(fileProject+"/website","r")
-    segmentsReference = []
-    for line in fin:
-        segmentsReference.append(line);
-    fin.close()
-    segFile = {}
-    segFileSize = {}
-    for x in range(0, numFile):
-        segFile[x] = []
-        segFileSize[x] = []
-    #print segFile
-    for seg in segmentsReference:
-        x = seg.split()
-        value = x[0]
-        key = x[-1]
-        size = x[1]
-        segFile[int(key)] += [value]
-        segFileSize[int(key)] += [size]
     
-    fileSize = {}
-    for x in range(0, numFile):
-        fileSize[x] = []
-    for num, file in segFileSize.iteritems():
+    segFileReference = []
+    for line in fin:
+        segFileReference.append(line);
+    fin.close()
+    
+    idSegFile = {}
+    sizeSegFile = {}
+    for numFile in range(0, numTotalFile):
+        idSegFile[numFile] = []
+        sizeSegFile[numFile] = []
+
+    for line in segFileReference:
+        lineFile = line.split()
+        idSeg = lineFile[0]
+        idFile = lineFile[-1]
+        sizeSeg = lineFile[1]
+        idSegFile[int(idFile)] += [idSeg]
+        sizeSegFile[int(idFile)] += [sizeSeg]
+    
+    fileTotalSize = {}
+    for numFile in range(0, numTotalFile):
+        fileTotalSize[numFile] = []
+        
+    for idFile, sizesSeg in sizeSegFile.iteritems():
         size = 0.0
-        for s in file:
-            size = size + float(s)
-            #print size
-            fileSize[num] = size
+        for sizeSeg in sizesSeg:
+            size += float(sizeSeg)
+        fileTotalSize[idFile] = size
         
     #intervalo entre arquivos
-    gapFile = numpy.random.exponential(gamaDistribution, numTraffic) #time
-    #popularidade
-    popularityFile = numpy.random.uniform(0, numFile, numTraffic) #id file
-    #laco por cada arquivo para sortear o inicio do video baseado em seu tamanho
+    gapFile = numpy.random.exponential(gapFileExponetial, numTraffic) #time
+    #lista de arquivos
+    popularityFile = numpy.random.uniform(0, numTotalFile, numTraffic) #id file
+    #sortear o inicio do video baseado em seu tamanho
     startFile = range(numTraffic)
-    for x in range(0,numTraffic):
-        lim = fileSize[int(popularityFile[x])]
-        startFile[x] = numpy.random.uniform(0, lim , 1)[0] #pareto(1, numTraffic) - 1 size
+    for numFile in range(0,numTraffic):
+        lim = fileTotalSize[int(popularityFile[numFile])]
+        startFile[numFile] = numpy.random.uniform(0, lim , 1)[0] #pareto(1, numTraffic) - 1 sizeSeg
     #laco por cada arquivo para sortear o permanenci do video baseado no restante do seu tamanho
     permanenceFile = range(numTraffic)
-    for x in range(0,numTraffic):
-        lim = fileSize[int(popularityFile[x])]
-        permanenceFile[x] = numpy.random.uniform(startFile[x], lim, 1)[0] #size
+    for numFile in range(0,numTraffic):
+        lim = fileTotalSize[int(popularityFile[numFile])]
+        permanenceFile[numFile] = numpy.random.uniform(startFile[numFile], lim, 1)[0] #sizeSeg
     #distribuicao do cliente
     distClient = numpy.random.uniform(0, numClient, numTraffic) #ID client
     
     content = ""
     traffic = {}
-    for value in range(0, numTraffic):
-        #print str(value)+"-"+str(gaps[value])+" "+str(clients[value])+" "+str(pages[value])+"\n"
-        numSeg = int(permanenceFile[value]/sizeSeg) - int(startFile[value]/sizeSeg)
+    for idSeg in range(0, numTraffic):
+        #print str(idSeg)+"-"+str(gaps[idSeg])+" "+str(clients[idSeg])+" "+str(pages[idSeg])+"\n"
+        numSeg = int(permanenceFile[idSeg]/absSizeSeg) - int(startFile[idSeg]/absSizeSeg)
         gapSeg = 0 #time (sera necessario)
-        for x in range(int(startFile[value]/sizeSeg), int(permanenceFile[value]/sizeSeg)):
-            traffic[gapFile[value]+gapSeg] = str(int(distClient[value]))+" "+str(segFile[int(popularityFile[value])][x])+"\n"
-            #content += str(gapFile[value]+gapSeg)+" "+str(int(distClient[value]))+" "+str(segFile[int(popularityFile[value])][x])+"\n"
-            gapSeg = gapSeg + sizeSeg/bitrate
-            #print int(startFile[value]/sizeSeg)
-            #print segFile[int(popularityFile[value])][int(startFile[value]/sizeSeg)]
-            #print int(permanenceFile[value]/sizeSeg)
-            #print segFile[int(popularityFile[value])][int(permanenceFile[value]/sizeSeg)]
+        for numFile in range(int(startFile[idSeg]/absSizeSeg), int(permanenceFile[idSeg]/absSizeSeg)):
+            traffic[gapFile[idSeg]+gapSeg] = str(int(distClient[idSeg]))+" "+str(idSegFile[int(popularityFile[idSeg])][numFile])+"\n"
+            #content += str(gapFile[idSeg]+gapSeg)+" "+str(int(distClient[idSeg]))+" "+str(idSegFile[int(popularityFile[idSeg])][numFile])+"\n"
+            gapSeg = gapSeg + absSizeSeg/bitrate
+            #print int(startFile[idSeg]/absSizeSeg)
+            #print idSegFile[int(popularityFile[idSeg])][int(startFile[idSeg]/absSizeSeg)]
+            #print int(permanenceFile[idSeg]/absSizeSeg)
+            #print idSegFile[int(popularityFile[idSeg])][int(permanenceFile[idSeg]/absSizeSeg)]
     #print traffic
     keySorted = sorted(traffic)
-    for x in keySorted:
-        content += str(x)+" "+str(traffic[x])
+    for numFile in keySorted:
+        content += str(numFile)+" "+str(traffic[numFile])
     #print content
     fout.write(content)
     fout.close()

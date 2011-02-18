@@ -10,8 +10,8 @@ from BottleBuilderRNP import buildBottleRNP
 
 
 
-def modifyNeed(configModel, bottleName):
-    fr = open("./" + configModel + "/bootle/" + bottleName + "/base.ned", "r")
+def modifyNeed(repGenModel, bottleName):
+    fr = open("./" + repGenModel + "/bootle/" + bottleName + "/base.ned", "r")
     temp = fr.read()
     fr.close()
     newContent = """
@@ -244,7 +244,7 @@ def modifyNeed(configModel, bottleName):
                 @display("i=abstract/router;p=347,826");
         }
         """
-    fout = open("./" + configModel + "/bootle/" + bottleName + "/base.ned", "w")
+    fout = open("./" + repGenModel + "/bootle/" + bottleName + "/base.ned", "w")
     fout.write(temp.replace(temp[temp.find("r0: Router"):temp.find("c57: GenericHost")], newContent))
     fout.close()
 
@@ -294,7 +294,7 @@ class MyApp(wx.App):
         options = OptionsTeste()
 
         cdnsimInstallationDir = dirname(dirname(sys.path[0]))
-        options.currentPath = "./"+configModel+"/"
+        options.currentPath = "./"+repGenModel+"/"
         
         options.outputDir = options.currentPath+"bootle"
         options.bottleName = bottleName
@@ -309,9 +309,9 @@ class MyApp(wx.App):
          
         options.linkSpeed = 1000
         options.routersGraphFile = options.currentPath+"/routersLink" 
-        options.clients = numClient
+        options.clients = numTotalClient
         options.surrogates = 27 
-        options.origins = numServer
+        options.origins = numTotalServer
         
         options.clientsOut = 1000 
         options.surrogatesOut = 1000
@@ -331,48 +331,53 @@ class MyApp(wx.App):
     
 '''Parameters'''
 pop = 27
-numServer = 27
-configModel = "configModel"
+numTotalServer = 27
+repGenModel = "configModel"
 bottleName = "exp01"
 numSeg = 0
 sizeSeg = 5000
 
 ''' Factor and Level '''
-numClient = 10**1 #10^1, 10^2, 10^3, 10^4, 10^5 (ClientLinkGen)
-clientDistr = "uni" #zipf, uniforme, pro (ClientLinkGen)
-numTraffic = 10**2 #10^3, 10^4, 10^5 (SegTrafficGen)
-gamaDistribution = 30 #30s, 60s exponetial (fixo SegTrafficGen)
+numTotalClient = 10**2 #10^1, 10^2, 10^3, 10^4, 10^5 (ClientLinkGen)
+#falta param Dist para ZIPF
+clientDistr = "uniforme" #zipf, uniforme, pro (ClientLinkGen)
+numTraffic = 10**4 #10^3, 10^4, 10^5 (SegTrafficGen)
+gapFileExponetial = 30 #The scale parameter of Exponential distribuition with values 30s, 60s exponetial (SegTrafficGen)
+# se for uniforme nao precisa desses valores
 permanence = "uniforme" #10%, 25%, 50%, 100% uniforme (fixo SegTrafficGen)
+# definir
 start = "pareto" #pareto (fixo SegTrafficGen)
+# definir
 popularity = "zipf" #zipf (fixo SegTrafficGen)
+# definir
 location = "propor" #propor (fixo OrigenContenGen) 
 cacheSize = 10**7 #10^7, 10^9, infinito tamanho em byte (BottleBuilderRNP)
 cacheKind = "LRU" #LRU, LFU (BottleBuilderRNP)
 selectionServer = "0" #NFC - 0, NMC, NMCL, Balanced, RSC, Random (FALTA COLOCAR O PARAMETRO)
-numFile = 10**2 #10^3, 10^4, 10^5 (SegWebsiteGen)
-timeFile = "Pareto" #(fixo SegWebsiteGen)
+numTotalFile = 10**3 #10^3, 10^4, 10^5 (SegWebsiteGen)
+timeFilePareto = 3. #shape of the Pareto distribution (SegWebsiteGen)
 bitrate = 128 #128, 256, 1024 (SegWebsiteGen)
 sizeFile = 0 #Calculado no SegWebsiteGem pelo timeFile e bitrate (SegWebsiteGen)
 
 '''Generator Script'''
 os.system("rm -rf \"../../models/"+bottleName+"\"")
 print "Generate Client Link"
-ClientLinkGen.generateLink(clientDistr, numClient, configModel, pop, numServer)
+ClientLinkGen.generateLinks(clientDistr, numTotalClient, repGenModel, pop, numTotalServer)
 print "Generate Website"
-numSeg = SegWebsiteGen.webSite(numFile, configModel, sizeSeg, bitrate)
+numSeg = SegWebsiteGen.generatePage(numTotalFile, repGenModel, sizeSeg, bitrate, timeFilePareto)
 #print "Num of Seg " + str(numSeg)
 print "Generate Traffic"
-SegTrafficGen.gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDistribution, sizeSeg, bitrate)
+SegTrafficGen.generateTraffic(numTotalClient, numTraffic, numTotalFile, repGenModel, bottleName, gapFileExponetial, sizeSeg, bitrate)
 print "Generate Bootle"
 app = MyApp(0)
 app.MainLoop()
 print "Modify Content"
-OrigenContentGen.modifyContent(bottleName, 27, numFile, configModel)
+OrigenContentGen.generateContentInOrigen(numTotalServer, numTotalFile, bottleName, repGenModel)
 print "Modify need for RNP"
-modifyNeed(configModel, bottleName)
+modifyNeed(repGenModel, bottleName)
 print "Copy Bootle to Models"
-os.system("cp -r \"./"+configModel+"/bootle/"+bottleName+"\" \"../../models/"+bottleName+"\"")
-os.system("rm -rf \"./"+configModel+"/bootle/"+bottleName+"\"")
+os.system("cp -r \"./"+repGenModel+"/bootle/"+bottleName+"\" \"../../models/"+bottleName+"\"")
+os.system("rm -rf \"./"+repGenModel+"/bootle/"+bottleName+"\"")
 print "Finished!"
 
 
