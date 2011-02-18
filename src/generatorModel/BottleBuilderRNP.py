@@ -541,6 +541,7 @@ network = base
 
 
 **.downloaderClass="DownloadersBase"
+**.result-recording-modes = all
 
 # tcp settings
 
