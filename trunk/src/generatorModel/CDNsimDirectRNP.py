@@ -320,7 +320,7 @@ class MyApp(wx.App):
         options.nRetries = 3
         options.mean = 5
         
-        options.policy = "0"
+        options.policy = selectionServer
         
         options.cacheSize = cacheSize
         options.cacheType = cacheKind
@@ -335,20 +335,21 @@ numServer = 27
 configModel = "configModel"
 bottleName = "exp01"
 numSeg = 0
-sizeSeg = 50000
+sizeSeg = 5000
+
 ''' Factor and Level '''
-numClient = 10 #10^1, 10^2, 10^3, 10^4, 10^5 (ClientLinkGen)
-clientDistr = "zipf" #zipf, uniforme, pro (ClientLinkGen)
-numTraffic = 100 #10^3, 10^4, 10^5 (SegTrafficGen)
+numClient = 10**1 #10^1, 10^2, 10^3, 10^4, 10^5 (ClientLinkGen)
+clientDistr = "uni" #zipf, uniforme, pro (ClientLinkGen)
+numTraffic = 10**2 #10^3, 10^4, 10^5 (SegTrafficGen)
 gamaDistribution = 30 #30s, 60s exponetial (fixo SegTrafficGen)
 permanence = "uniforme" #10%, 25%, 50%, 100% uniforme (fixo SegTrafficGen)
 start = "pareto" #pareto (fixo SegTrafficGen)
 popularity = "zipf" #zipf (fixo SegTrafficGen)
 location = "propor" #propor (fixo OrigenContenGen) 
-cacheSize = 1.0*10**7 #10^7, 10^9, infinito tamanho em byte (BottleBuilderRNP)
+cacheSize = 10**7 #10^7, 10^9, infinito tamanho em byte (BottleBuilderRNP)
 cacheKind = "LRU" #LRU, LFU (BottleBuilderRNP)
-selectionServer = "NFC" #NFC, NMC, NMCL, Balanced, RSC, Random (FALTA USAR)
-numFile = 50 #10^3, 10^4, 10^5 (SegWebsiteGen)(FALTA FAZER a distribuicao no OrigenContentGen)
+selectionServer = "0" #NFC - 0, NMC, NMCL, Balanced, RSC, Random (FALTA COLOCAR O PARAMETRO)
+numFile = 10**2 #10^3, 10^4, 10^5 (SegWebsiteGen)
 timeFile = "Pareto" #(fixo SegWebsiteGen)
 bitrate = 128 #128, 256, 1024 (SegWebsiteGen)
 sizeFile = 0 #Calculado no SegWebsiteGem pelo timeFile e bitrate (SegWebsiteGen)
@@ -361,7 +362,7 @@ print "Generate Website"
 numSeg = SegWebsiteGen.webSite(numFile, configModel, sizeSeg, bitrate)
 #print "Num of Seg " + str(numSeg)
 print "Generate Traffic"
-SegTrafficGen.gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDistribution, sizeSeg)
+SegTrafficGen.gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDistribution, sizeSeg, bitrate)
 print "Generate Bootle"
 app = MyApp(0)
 app.MainLoop()

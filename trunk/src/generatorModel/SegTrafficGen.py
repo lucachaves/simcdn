@@ -1,7 +1,7 @@
 import numpy
 import random
 
-def gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDistribution, sizeSeg):
+def gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDistribution, sizeSeg, bitrate):
     fout = open("./"+configModel+"/traffic", 'w')
     
     #obter os segmentos de um arquivo
@@ -61,7 +61,7 @@ def gapPoisson(numClient, numTraffic, numFile, configModel, bottleName, gamaDist
         for x in range(int(startFile[value]/sizeSeg), int(permanenceFile[value]/sizeSeg)):
             traffic[gapFile[value]+gapSeg] = str(int(distClient[value]))+" "+str(segFile[int(popularityFile[value])][x])+"\n"
             #content += str(gapFile[value]+gapSeg)+" "+str(int(distClient[value]))+" "+str(segFile[int(popularityFile[value])][x])+"\n"
-            gapSeg = gapSeg + 0.5
+            gapSeg = gapSeg + sizeSeg/bitrate
             #print int(startFile[value]/sizeSeg)
             #print segFile[int(popularityFile[value])][int(startFile[value]/sizeSeg)]
             #print int(permanenceFile[value]/sizeSeg)
