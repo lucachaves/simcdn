@@ -12,7 +12,7 @@ def generateLink(kind, clientSize, configModel, pop, numServer):
 
 #Generate links by percentage of POP in networking
 def clientPropor(clientSize, configModel, pop, numServer):
-    # File hava percentage of link in POPs of the RNP
+    # File have percentage of link in POPs of the RNP
     client = open("./"+configModel+"/estadosLinkRNP")
     patObjectsFile = re.compile("(\d+\.\d+)(\ +)(\d+)(\ +)(\w+)")
     # File have links of the clients in routers
@@ -48,10 +48,9 @@ def clientZipf(clientSize, configModel, pop, numServer):
 # Generate Client by Uniforme
 def clientUnifor(clientSize, configModel, pop, numServer):
     fout = open("./"+configModel+"/clientsLink", 'w')
-    numClient = 0 
-    while numClient < clientSize:
-        fout.write(str((numClient%pop)+numServer)+"\n")
-        numClient = numClient + 1
+    links = numpy.random.uniform(0, pop, clientSize)+numServer
+    for link in links:
+        fout.write(str(link)+"\n")
 
 # Generate Client by Ramdon    
 def clientRamd(clientSize, configModel, pop, numServer):
